@@ -5,9 +5,15 @@ const port = 5050;
 const sequelize = require("./sequelize");
 
 const users = require("./routes/users.route");
+const drugs = require("./routes/drugs.route");
+const treatments = require("./routes/treatments.route");
+const intakes = require("./routes/intakes.route");
 
 app.use(express.json());
+app.use("/drugs", drugs);
 app.use("/users", users);
+app.use("/treatments", treatments);
+app.use("/intakes", intakes);
 // permet de renvoyer un json
 
 app.get("/", (req, res) => {

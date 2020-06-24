@@ -11,6 +11,18 @@ users.get("/", async (req, res) => {
     }
 });
 
+users.get("/:id", async (req, res) => {
+    const { id } = req.params;
+    console.log(id);
+    try {
+        const user = await User.findAll({ where: { id } });
+        console.log(user);
+        res.status(200).json(user);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
 users.post("/", async (req, res) => {
     const { lastName, firstName, email, password, phone_number } = req.body;
     try {

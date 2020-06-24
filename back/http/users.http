@@ -4,6 +4,9 @@ GET http://localhost:5050/ HTTP/1.1
 ### GET all users
 GET http://localhost:5050/users HTTP/1.1
 
+###Get One users
+GET http://localhost:5050/users/464d0bd4-e0d2-48cb-813a-763bf152f074 HTTP/1.1
+
 ### Post User
 POST http://localhost:5050/users HTTP/1.1
 Content-Type: application/json
