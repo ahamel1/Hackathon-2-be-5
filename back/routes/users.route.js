@@ -2,6 +2,10 @@ const express = require("express");
 const users = express.Router();
 const User = require("../models/User");
 
+const {authToken} = require("../middlewares")
+
+
+
 users.get("/", async (req, res) => {
     try {
         const users = await User.findAll();
@@ -33,6 +37,8 @@ users.post("/", async (req, res) => {
             password,
             phone_number,
         });
+
+        delete user.dataValues.password
         res.status(201).json(user);
     } catch (err) {
         res.status(422).json(err);

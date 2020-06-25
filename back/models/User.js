@@ -1,4 +1,5 @@
 const Sequelize = require("sequelize");
+const bcrypt = require("bcrypt")
 
 const sequelizeInstance = require("../sequelize");
 
@@ -20,20 +21,29 @@ const User = sequelizeInstance.define("User", {
     email: {
         type: Sequelize.STRING(100),
         allowNull: false,
+        unique: true
     },
     password: {
-        type: Sequelize.STRING(14),
+        type: Sequelize.STRING,
         allowNull: false,
-        validate: {
-            max: 14,
-            min: 8,
-        },
+        
     },
-
     phone_number: {
         type: Sequelize.INTEGER(15),
         allowNull: false,
     },
+}, {
+    hooks: {
+        beforeCreate: (user) => {
+            const salt = bcrypt.genSaltSync();
+            user.password = bcrypt.hashSync(user.password, salt)
+        }
+    }
 });
+
+User.prototype.checkPassword = function(password) {
+    return bcrypt.compareSync(password, this.password)
+}
+
 
 module.exports = User;

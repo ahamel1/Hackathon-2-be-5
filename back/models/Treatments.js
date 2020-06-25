@@ -9,14 +9,14 @@ const Treatment = sequelizeInstance.define("Treatment", {
         primaryKey: true,
         defaultValue: Sequelize.UUIDV4,
     },
-    name: {
-        type: Sequelize.STRING(100),
+    startDate: {
+        type: Sequelize.DATEONLY,
         allowNull: false,
     },
-    duration: {
-        type: Sequelize.INTEGER(100),
-        allowNull: false,
-    },
+    endDate: {
+        type: Sequelize.DATEONLY,
+        allowNull: false
+    }
 });
 
 module.exports = Treatment;

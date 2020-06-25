@@ -17,7 +17,6 @@ Content-Type: application/json
     "email" : "toto@gmail.com",
     "password" : "totodheo",
     "phone_number" : 336
-       
 }
 
 ### Put User

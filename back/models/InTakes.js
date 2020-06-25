@@ -15,12 +15,10 @@ const Intakes = sequelizeInstance.define("Intakes", {
     },
     used: {
         type: Sequelize.BOOLEAN,
-        allowNull: true,
+        defaultValue: false
     },
 });
 
 module.exports = Intakes;
 
-// Sequelize.DATE                        // DATETIME for mysql / sqlite, TIMESTAMP WITH TIME ZONE for postgres
-// Sequelize.DATE(6)                     // DATETIME(6) for mysql 5.6.4+. Fractional seconds support with up to 6 digits of precision
-// Sequelize.DATEONLY                    // DATE without time.
+
