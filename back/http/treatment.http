@@ -1,0 +1,33 @@
+### GET 
+GET http://localhost:5050/ HTTP/1.1
+
+### GET all Treatments
+GET http://localhost:5050/treatments HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijg4MmQ4OTU3LWRhMWItNDAyYi05YTFjLTExNzUyYzUxYWZiOSIsImVtYWlsIjoicmFvdWxAaG90bWFpbC5jb20iLCJpYXQiOjE1OTMwNzg2MjksImV4cCI6MTU5MzE2NTAyOX0.rP8C_HK4wwbDMIXNUpchyZQY3iU75yPhBiPoStzdjk4
+
+###Get One Treamtments
+GET http://localhost:5050/treatments/464d0bd4-e0d2-48cb-813a-763bf152f074 HTTP/1.1
+
+### Post Treatment
+POST http://localhost:5050/treatments HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijg4MmQ4OTU3LWRhMWItNDAyYi05YTFjLTExNzUyYzUxYWZiOSIsImVtYWlsIjoicmFvdWxAaG90bWFpbC5jb20iLCJpYXQiOjE1OTMwNzg2MjksImV4cCI6MTU5MzE2NTAyOX0.rP8C_HK4wwbDMIXNUpchyZQY3iU75yPhBiPoStzdjk4
+Content-Type: application/json
+
+{
+    "startDate":"2020-06-26",
+    "endDate":"2020-07-03"
+}
+
+### Put Treatment
+PUT http://localhost:5050/treatments/b0d9fdda-5bb2-4f2a-9dca-963161934a28 HTTP/1.1
+Content-Type: application/json
+
+{ 
+    "name" : "Grippe",
+    "duration" : 7 
+}
+
+### DELETE Treatment
+DELETE http://localhost:5050/treatments/b0d9fdda-5bb2-4f2a-9dca-963161934a28 HTTP/1.1
+
+
