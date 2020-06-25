@@ -39,7 +39,7 @@ export default function Home() {
 
   return (
     <>
-      <Row style={{ margin: '3rem' }}>
+      <Row style={{ padding: '3rem 0' }}>
         <Col className="d-flex justify-content-center text-center">
           <h2>Hi, Marc !</h2>
         </Col>
