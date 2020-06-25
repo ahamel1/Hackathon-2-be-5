@@ -1,5 +1,9 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input, Col, Row } from 'reactstrap';
+import style from './Form.module.css';
+
+import Medecine from './medecine';
+import TimeLeft from './TimeLeft';
 
 export default function AddTreatment() {
   return (
@@ -102,6 +106,10 @@ export default function AddTreatment() {
 
           <Button>Submit</Button>
         </Form>
+      </Col>
+      <Col className={style.container}>
+        <Medecine />
+        <TimeLeft />
       </Col>
     </Row>
   );
