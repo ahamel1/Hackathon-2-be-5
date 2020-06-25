@@ -7,6 +7,9 @@ import {
   InputGroup,
   InputGroupAddon,
   Input,
+  Toast,
+  ToastBody,
+  ToastHeader,
 } from 'reactstrap';
 
 import DateTime from './Date';
@@ -15,18 +18,24 @@ export default function Home() {
   const [isDoneOne, setIsDoneOne] = useState(false);
   const [isDoneTwo, setIsDoneTwo] = useState(false);
   const [isDoneThree, setIsDoneThree] = useState(false);
+  const [show, setShow] = useState(false);
 
   const handleClickOne = () => {
     setIsDoneOne(!isDoneOne);
+    setShow(!show);
   };
 
   const handleClickTwo = () => {
     setIsDoneTwo(!isDoneTwo);
+    setShow(!show);
   };
 
   const handleClickThree = () => {
     setIsDoneThree(!isDoneThree);
+    setShow(!show);
   };
+
+  const toggle = () => setShow(!show);
 
   return (
     <>
@@ -165,7 +174,18 @@ export default function Home() {
                 </InputGroup>
               </Col>
             </ListGroupItem>
-            {/* {items.map((item) => {
+          </ListGroup>
+        </Col>
+      </Row>
+      <Toast isOpen={show}>
+        <ToastHeader toggle={toggle}>Great job !</ToastHeader>
+        <ToastBody>You took your medication !</ToastBody>
+      </Toast>
+    </>
+  );
+}
+
+/* {items.map((item) => {
               return (
                 <ListGroupItem
                   className={
@@ -195,33 +215,7 @@ export default function Home() {
                   </Col>
                 </ListGroupItem>
               );
-            })} */}
-          </ListGroup>
-        </Col>
-      </Row>
-      <div
-        className="toast"
-        role="alert"
-        aria-live="assertive"
-        aria-atomic="true"
-      >
-        <div className="toast-header">
-          <img src="..." className="rounded mr-2" alt="..." />
-          <strong className="mr-auto">You took your medication</strong>
-          <button
-            type="button"
-            className="ml-2 mb-1 close"
-            data-dismiss="toast"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div className="toast-body">Good job !</div>
-      </div>
-    </>
-  );
-}
+            })} */
 
 // {items
 //   .filter((item) => item.hour === '9')

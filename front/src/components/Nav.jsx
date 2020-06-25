@@ -32,7 +32,7 @@ const MainNav = () => {
           </NavItem>
           <NavItem>
             <NavLink className="textColorNav" tag={Link} to="/traitements">
-              Traitements
+              Treatments
             </NavLink>
           </NavItem>
         </Nav>
