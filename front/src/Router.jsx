@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import App from './App';
 import MainNav from './components/Nav';
@@ -15,6 +16,7 @@ const ProjectRouter = () => {
         <Route exact path="/home" component={App} />
         <Route path="/traitements" component={AddTreatment} />
       </Switch>
+      <ToastContainer position="bottom-center" autoClose={5000} />
     </Router>
   );
 };
