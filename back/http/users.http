@@ -5,16 +5,16 @@ GET http://localhost:5050/ HTTP/1.1
 GET http://localhost:5050/users HTTP/1.1
 
 ###Get One users
-GET http://localhost:5050/users/464d0bd4-e0d2-48cb-813a-763bf152f074 HTTP/1.1
+GET http://localhost:5050/users/6410d35a-562a-48b8-9e2b-594e9ffc2a82 HTTP/1.1
 
 ### Post User
 POST http://localhost:5050/users HTTP/1.1
 Content-Type: application/json
 
 {
-    "lastName" : "Vernouillet",
-    "firstName" : "Basile",
-    "email" : "basiletoto@gmail.com",
+    "lastName" : "Dupont",
+    "firstName" : "Jean",
+    "email" : "jeandupont@gmail.com",
     "password" : "test",
     "phone_number" : 336
 }
