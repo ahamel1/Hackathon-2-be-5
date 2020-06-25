@@ -9,9 +9,7 @@ POST http://localhost:5050/drugs HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "Ibuprophene",
-    "dosage": "1g",
-    "molecule": "Aspirine"
+    "name": "Lyrica"
 }
 
 ### PUT One Drug

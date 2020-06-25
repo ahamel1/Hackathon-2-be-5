@@ -12,10 +12,10 @@ POST http://localhost:5050/users HTTP/1.1
 Content-Type: application/json
 
 {
-    "lastName" : "toto",
-    "firstName" : "toto",
-    "email" : "toto@gmail.com",
-    "password" : "totodheo",
+    "lastName" : "Vernouillet",
+    "firstName" : "Basile",
+    "email" : "basiletoto@gmail.com",
+    "password" : "test",
     "phone_number" : 336
 }
 

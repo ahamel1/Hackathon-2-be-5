@@ -12,6 +12,8 @@ import {
   ToastHeader,
 } from 'reactstrap';
 
+import TreatmentsList from './TreatmentsList';
+
 import DateTime from './Date';
 
 export default function Home() {
@@ -44,7 +46,10 @@ export default function Home() {
           <h2>Hi, Marc !</h2>
         </Col>
       </Row>
-      <Row>
+
+      <TreatmentsList />
+
+      {/* <Row>
         <Col className="d-flex justify-content-center text-center">
           <ListGroup className="w-75">
             <ListGroupItem style={{ border: '2px solid #5bd1ff' }}>
@@ -176,7 +181,7 @@ export default function Home() {
             </ListGroupItem>
           </ListGroup>
         </Col>
-      </Row>
+      </Row> */}
       <Toast isOpen={show}>
         <ToastHeader toggle={toggle}>Great job !</ToastHeader>
         <ToastBody>You took your medication !</ToastBody>
