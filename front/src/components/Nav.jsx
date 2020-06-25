@@ -11,22 +11,27 @@ import {
   NavLink,
 } from 'reactstrap';
 
+import Logo from '../logo.png';
+
 const MainNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   return (
-    <Navbar color="light" light expand="md">
-      <NavbarBrand href="/">LOGO</NavbarBrand>
+    <Navbar expand="md" style={{ backgroundColor: '#5bd1ff' }}>
+      <NavbarBrand className="textColorNav" href="/home">
+        <img className="mr-3" style={{ width: '3rem' }} src={Logo} alt="pill" />
+        Le Nom
+      </NavbarBrand>
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
         <Nav className="ml-auto" navbar>
           <NavItem>
-            <NavLink tag={Link} to="/">
+            <NavLink className="textColorNav" tag={Link} to="/home">
               Home
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink tag={Link} to="/traitements">
+            <NavLink className="textColorNav" tag={Link} to="/traitements">
               Traitements
             </NavLink>
           </NavItem>

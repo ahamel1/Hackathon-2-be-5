@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input, Col, Row } from 'reactstrap';
 
 export default function User() {
@@ -19,9 +20,16 @@ export default function User() {
 
   return (
     <>
+      <Row className="mt-4">
+        <Col className="d-flex justify-content-center text-align text-center">
+          <h3>
+            Hey ! <br /> How are you ? <br /> Let&apos;s go take care of you !
+          </h3>
+        </Col>
+      </Row>
       <Row>
         <Col className="d-flex justify-content-center">
-          <Form className="w-75 mt-4" onSubmit={handleSubmit}>
+          <Form className="w-50 mt-4" onSubmit={handleSubmit}>
             <FormGroup>
               <Label for="userEmail">Email</Label>
               <Input
@@ -46,7 +54,13 @@ export default function User() {
                 required
               />
             </FormGroup>
-            <Button color="white" className="btn-outline-primary float-right">
+            <Button
+              color="white"
+              className="hoverClass float-right"
+              style={{ borderColor: '#5bd1ff', color: '#5bd1ff' }}
+              tag={Link}
+              to="/home"
+            >
               Submit
             </Button>
           </Form>

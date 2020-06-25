@@ -10,5 +10,16 @@ export default function DateTime() {
     };
   }, []);
 
-  return <h2 className="mb-0">{`${dateTime.toLocaleDateString()}`}</h2>;
+  const options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  };
+
+  return (
+    <h4 className="mb-0 text-uppercase">
+      {`${dateTime.toLocaleDateString('fr-FR', options)}`}
+    </h4>
+  );
 }

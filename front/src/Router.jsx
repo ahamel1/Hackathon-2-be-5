@@ -11,9 +11,9 @@ const ProjectRouter = () => {
     <Router>
       <MainNav />
       <Switch>
-        <Route exact path="/" component={App} />
+        <Route exact path="/" component={User} />
+        <Route exact path="/home" component={App} />
         <Route path="/traitements" component={AddTreatment} />
-        <Route path="/connection" component={User} />
       </Switch>
     </Router>
   );
