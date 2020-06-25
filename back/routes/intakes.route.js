@@ -24,10 +24,11 @@ intakes.get("/:id", async (req, res) => {
 });
 
 intakes.post("/", async (req, res) => {
-    const { datetime } = req.body;
+    const { datetime, TreatmentId } = req.body;
     try {
         const user = await inTakes.create({
             datetime,
+            TreatmentId
         });
         res.status(201).json(user);
     } catch (err) {

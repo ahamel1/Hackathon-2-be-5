@@ -1,7 +1,10 @@
 const express = require("express");
 const {Op} = require("sequelize")
+
 const treatments = express.Router();
+
 const Treatment = require("../models/Treatments");
+const Intakes = require("../models/InTakes")
 const {authToken } = require("../middlewares")
 
 treatments.use(authToken)
@@ -11,7 +14,9 @@ treatments.get("/" ,async (req, res) => {
         const treatments = await Treatment.findAll({
             where : {
                 UserId : req.user.id,
-            }
+            },
+            include: [{ model: Intakes, attributes: ['id', 'datetime', 'used'] }]
+            //récupère seulement les attributs du tableau
         });
         res.status(200).json(treatments);
     } catch (err) {
