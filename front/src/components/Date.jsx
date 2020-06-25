@@ -19,7 +19,7 @@ export default function DateTime() {
 
   return (
     <h4 className="mb-0 text-uppercase">
-      {`${dateTime.toLocaleDateString('fr-FR', options)}`}
+      {`${dateTime.toLocaleDateString('en-EN', options)}`}
     </h4>
   );
 }
