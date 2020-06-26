@@ -73,7 +73,7 @@ let transporter = nodemailer.createTransport({
  *
  * https://scotch.io/tutorials/nodejs-cron-jobs-by-examples
  */
-cron.schedule("* 15 * * * *", async () => {
+cron.schedule("* 5 * * * *", async () => {
   console.log("---------------------");
   console.log("Running Cron Job");
 
@@ -102,7 +102,8 @@ cron.schedule("* 15 * * * *", async () => {
       const drugName = int.Drug.name;
 
       const date = new Date(int.datetime).getTime();
-      const now = new Date().getTime();
+      const now = new Date().getTime() + 7200000;
+
       if (!int.used && date <= now) {
         const info = await transporter.sendMail({
           from: "reminder@doctothon.org",
