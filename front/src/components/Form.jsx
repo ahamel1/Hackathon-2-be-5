@@ -1,13 +1,23 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input, Col, Row } from 'reactstrap';
+import { toast } from 'react-toastify';
 
 export default function AddTreatment() {
+  const handleClick = () => {
+    toast.info('Medication added');
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <Row>
       <Col className="d-flex justify-content-center">
-        <Form className="w-75 mt-4">
+        <Form className="w-50 mt-4">
           <FormGroup>
-            <Label for="drugsName">Nom du médicament</Label>
+            <Label for="drugsName">Name</Label>
             <Input
               type="text"
               name="text"
@@ -16,82 +26,7 @@ export default function AddTreatment() {
             />
           </FormGroup>
           <FormGroup>
-            <Label for="drugsMolecule">Molécule</Label>
-            <Input
-              type="text"
-              name="text"
-              id="drugsMolecule"
-              placeholder="Paracétamol"
-            />
-          </FormGroup>
-          <FormGroup>
-            <div>
-              <FormGroup>
-                <Label for="dosage">Nbre cp matin</Label>
-                <Input
-                  type="number"
-                  name="number"
-                  id="dosage"
-                  placeholder="3"
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="exampleTime">Heure</Label>
-                <Input
-                  type="time"
-                  name="time"
-                  id="exampleTime"
-                  placeholder="time placeholder"
-                />
-              </FormGroup>
-            </div>
-            <div>
-              <FormGroup>
-                <Label for="dosage">Nbre cp midi</Label>
-                <Input
-                  type="number"
-                  name="number"
-                  id="dosage"
-                  placeholder="3"
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="exampleTime">Time</Label>
-                <Input
-                  type="time"
-                  name="time"
-                  id="exampleTime"
-                  placeholder="time placeholder"
-                />
-              </FormGroup>
-            </div>
-            <div>
-              <FormGroup>
-                <Label for="dosage">Nbre cp soir</Label>
-                <Input
-                  type="number"
-                  name="number"
-                  id="dosage"
-                  placeholder="3"
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="exampleTime">Time</Label>
-                <Input
-                  type="time"
-                  name="time"
-                  id="exampleTime"
-                  placeholder="time placeholder"
-                />
-              </FormGroup>
-            </div>
-          </FormGroup>
-          <FormGroup>
-            <Label for="dosage">Durée du traitement (en jours)</Label>
-            <Input type="number" name="text" id="time" placeholder="10" />
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleDate">Date de début</Label>
+            <Label for="exampleDate">Starting date</Label>
             <Input
               type="date"
               name="date"
@@ -99,8 +34,83 @@ export default function AddTreatment() {
               placeholder="date placeholder"
             />
           </FormGroup>
-
-          <Button>Submit</Button>
+          <FormGroup>
+            <Label for="dosage">Duration of treatment (in days)</Label>
+            <Input type="number" name="text" id="time" placeholder="10" />
+          </FormGroup>
+          <FormGroup>
+            <div className="d-flex justify-content-start">
+              <FormGroup style={{ width: '100%' }}>
+                <Label for="dosage">Morning dosage</Label>
+                <Input
+                  type="number"
+                  name="number"
+                  id="dosage"
+                  placeholder="1000g"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="exampleTime">Time</Label>
+                <Input
+                  type="time"
+                  name="time"
+                  id="exampleTime"
+                  placeholder="time placeholder"
+                />
+              </FormGroup>
+            </div>
+            <div className="d-flex justify-content-start">
+              <FormGroup style={{ width: '100%' }}>
+                <Label for="dosage">Noon dosage</Label>
+                <Input
+                  type="number"
+                  name="number"
+                  id="dosage"
+                  placeholder="1000g"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="exampleTime">Time</Label>
+                <Input
+                  type="time"
+                  name="time"
+                  id="exampleTime"
+                  placeholder="time placeholder"
+                />
+              </FormGroup>
+            </div>
+            <div className="d-flex justify-content-start">
+              <FormGroup style={{ width: '100%' }}>
+                <Label for="dosage">Evening dosage</Label>
+                <Input
+                  type="number"
+                  name="number"
+                  id="dosage"
+                  placeholder="1000g"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="exampleTime">Time</Label>
+                <Input
+                  type="time"
+                  name="time"
+                  id="exampleTime"
+                  placeholder="time placeholder"
+                />
+              </FormGroup>
+            </div>
+          </FormGroup>
+          <Link to="/treatment">
+            <Button
+              color="white"
+              className="hoverClass float-right"
+              style={{ borderColor: '#5bd1ff', color: '#5bd1ff' }}
+              onClick={handleClick}
+              onSubmit={handleSubmit}
+            >
+              Submit
+            </Button>
+          </Link>
         </Form>
       </Col>
     </Row>

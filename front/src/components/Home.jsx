@@ -30,7 +30,7 @@ export default function Home() {
     <Container>
       <Row style={{ margin: '3rem' }}>
         <Col className="d-flex justify-content-center text-center">
-          <h2>Hi, Jean !</h2>
+          <h2>Hi, Basile !</h2>
         </Col>
       </Row>
 

@@ -14,7 +14,7 @@ const ProjectRouter = () => {
       <Switch>
         <Route exact path="/" component={User} />
         <Route exact path="/home" component={App} />
-        <Route path="/traitements" component={AddTreatment} />
+        <Route path="/treatments" component={AddTreatment} />
       </Switch>
       <ToastContainer position="bottom-center" autoClose={5000} />
     </Router>

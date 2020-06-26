@@ -18,9 +18,9 @@ const MainNav = () => {
   const toggle = () => setIsOpen(!isOpen);
   return (
     <Navbar expand="md" style={{ backgroundColor: '#5bd1ff' }}>
-      <NavbarBrand className="textColorNav" href="/home">
+      <NavbarBrand className="textColorNav" href="/">
         <img className="mr-3" style={{ width: '3rem' }} src={Logo} alt="pill" />
-        Le Nom
+        Toc-toc Pills
       </NavbarBrand>
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
@@ -31,8 +31,8 @@ const MainNav = () => {
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink className="textColorNav" tag={Link} to="/traitements">
-              Treatments
+            <NavLink className="textColorNav" tag={Link} to="/treatments">
+              Add treatment
             </NavLink>
           </NavItem>
         </Nav>
