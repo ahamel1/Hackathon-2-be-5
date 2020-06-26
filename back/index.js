@@ -73,7 +73,7 @@ let transporter = nodemailer.createTransport({
  *
  * https://scotch.io/tutorials/nodejs-cron-jobs-by-examples
  */
-cron.schedule("* 15 * * * *", async () => {
+cron.schedule("* 5 * * * *", async () => {
   console.log("---------------------");
   console.log("Running Cron Job");
 
@@ -102,14 +102,25 @@ cron.schedule("* 15 * * * *", async () => {
       const drugName = int.Drug.name;
 
       const date = new Date(int.datetime).getTime();
-      const now = new Date().getTime();
+      const now = new Date().getTime() + 7200000;
+
       if (!int.used && date <= now) {
         const info = await transporter.sendMail({
           from: "reminder@doctothon.org",
           to: email,
           subject: `REMINDER`,
-          text: `Hi, did you take your ${drugName} ?`,
-          html: ``,
+          // text: `Hi, did you take your ${drugName} ?`,
+          html: `
+          <div>
+        <h2>Hi Basile, how are you ?</h2>
+        <p>I think you forgot to take your medicine !</p>
+        <p>Let's take it !</p>
+        <img
+          src="https://media1.giphy.com/media/4Hq29KXEzQfsqiqYOO/giphy.gif?cid=ecf05e47a16251a1b3548d1fbe7239c7f8803c9a1fb057ab&rid=giphy.gif"
+          alt="gif"
+        ></img>
+      </div>
+          `,
         });
         console.log(info);
       }

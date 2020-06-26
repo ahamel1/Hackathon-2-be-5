@@ -25,7 +25,7 @@ function Intake({ id, used, datetime, dosage, Drug }) {
 
   const orange = (datetime) => {
     const hour = new Date(datetime).getTime();
-    const now = new Date().getTime();
+    const now = new Date().getTime() + 7200000;
     if (hour < now && !isChecked) {
       return true;
     }
