@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
-    "start" : "node index.js"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +19,8 @@
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
     "mysql2": "^2.1.0",
+    "node-cron": "^2.0.3",
+    "nodemailer": "^6.4.10",
     "nodemon": "^2.0.4",
     "sequelize": "^6.1.0"
   }

@@ -1,37 +1,35 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-
+const nodemailer = require("nodemailer");
+const cron = require("node-cron");
 
 const sequelize = require("./sequelize");
-require("./associations")
+require("./associations");
 
+const mail = require("./routes/mailer.route");
 const auth = require("./routes/auth.route");
 const users = require("./routes/users.route");
 const drugs = require("./routes/drugs.route");
 const treatments = require("./routes/treatments.route");
 const intakes = require("./routes/intakes.route");
 
-const User = require("./models/User")
-const {authToken} = require("./middlewares")
-
-
-// Bar.belongsToMany(Foo, {
-//     as: "Foo",
-//     through: "rel",
-//     foreignKey: "customNameForBar", // Custom name for column in rel referencing to Bar
-//     sourceKey: "name", // Column in Foo which rel will reference to
-//   });
-
-
+const User = require("./models/User");
+const Drugs = require("./models/Drugs");
+const InTakes = require("./models/InTakes");
+const Treatment = require("./models/Treatments");
+const { authToken } = require("./middlewares");
 
 const app = express();
 const port = 5050;
 
-app.use(cors({
-    origin: process.env.FRONT_URL
-}))
+app.use(
+  cors({
+    origin: process.env.FRONT_URL,
+  })
+);
 app.use(express.json());
+app.use("/mail", mail);
 app.use("/auth", auth);
 app.use("/drugs", drugs);
 app.use("/users", users);
@@ -40,37 +38,100 @@ app.use("/intakes", intakes);
 // permet de renvoyer un json
 
 app.get("/", (req, res) => {
-    res.status(200).send("Bienvenue sur Doctothron");
+  res.status(200).send("Bienvenue sur Doctothron");
 });
 
 app.get("/me", authToken, async (req, res) => {
-const {id} = req.user
-    try {
-        const me = await User.findOne({
-            where: { id},
-            attributes: {
-                exclude : ["password"]
-            }
-        })
-        res.status(200).json(me)
-    } catch (error) {
-        
-    }
-})
+  const { id } = req.user;
+  try {
+    const me = await User.findOne({
+      where: { id },
+      attributes: {
+        exclude: ["password"],
+      },
+    });
+    res.status(200).json(me);
+  } catch (error) {}
+});
+
+let transporter = nodemailer.createTransport({
+  host: "smtp.mailtrap.io",
+  port: 2525,
+  auth: {
+    user: "2ac622624e8532",
+    pass: "918f4d6973015d",
+  },
+});
+
+/**
+ * install node-cron
+ * every XXmin with node-cron :
+ * Intakes.findAll() -> intakes[]
+ * loop intakes[]
+ * if !used && datetime <= Date.now()
+ *      sendEmail
+ *
+ * https://scotch.io/tutorials/nodejs-cron-jobs-by-examples
+ */
+cron.schedule("* 15 * * * *", async () => {
+  console.log("---------------------");
+  console.log("Running Cron Job");
+
+  try {
+    const intakes = await InTakes.findAll({
+      include: [
+        {
+          model: Treatment,
+          attributes: ["id"],
+          include: [
+            {
+              model: User,
+              attributes: ["email"],
+            },
+          ],
+        },
+        {
+          model: Drugs,
+          attributes: ["name"],
+        },
+      ],
+    });
+
+    intakes.forEach(async (int) => {
+      const email = int.Treatment.User.email;
+      const drugName = int.Drug.name;
+
+      const date = new Date(int.datetime).getTime();
+      const now = new Date().getTime();
+      if (!int.used && date <= now) {
+        const info = await transporter.sendMail({
+          from: "reminder@doctothon.org",
+          to: email,
+          subject: `REMINDER`,
+          text: `Hi, did you take your ${drugName} ?`,
+          html: ``,
+        });
+        console.log(info);
+      }
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 sequelize
-    .sync({ alter: true })
-    .then(() => {
-        return sequelize.authenticate();
-    })
-    .then(() => {
-        app.listen(port, (err) => {
-            if (err) {
-                throw new Error("Something really bad happened ...");
-            }
-            console.log(`Server is listening on ${port}`);
-        });
-    })
-    .catch((err) => {
-        console.log("enable to join database", err.message);
+  .sync()
+  .then(() => {
+    return sequelize.authenticate();
+  })
+  .then(() => {
+    app.listen(port, (err) => {
+      if (err) {
+        throw new Error("Something really bad happened ...");
+      }
+      console.log(`Server is listening on ${port}`);
     });
+  })
+  .catch((err) => {
+    console.log("enable to join database", err.message);
+  });
