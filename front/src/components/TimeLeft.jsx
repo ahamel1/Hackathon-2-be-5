@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'reactstrap';
 import styles from './medecine.module.css';
 
-class Medecine extends React.Component {
+class TimeLeft extends React.Component {
   constructor(props) {
     super(props);
     this.state = { count: 0 };
@@ -25,7 +25,7 @@ class Medecine extends React.Component {
     const { count } = this.state;
     return (
       <div className={styles.container}>
-        <p className={styles.p}>Notify me when</p>
+        <p className={styles.p}>Notify me when </p>
         <p className={styles.p}>{count}</p>
 
         <div className={styles.main}>
@@ -47,10 +47,10 @@ class Medecine extends React.Component {
             +
           </Button>
         </div>
-        <p className={styles.p}>pills remains</p>
+        <p className={styles.p}>minutes before intake</p>
       </div>
     );
   }
 }
 
-export default Medecine;
+export default TimeLeft;

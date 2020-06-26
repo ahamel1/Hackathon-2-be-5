@@ -2,6 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input, Col, Row } from 'reactstrap';
 import { toast } from 'react-toastify';
+import style from './Form.module.css';
+
+import Medecine from './medecine';
+import TimeLeft from './TimeLeft';
 
 export default function AddTreatment() {
   const handleClick = () => {
@@ -112,6 +116,10 @@ export default function AddTreatment() {
             </Button>
           </Link>
         </Form>
+      </Col>
+      <Col className={style.container}>
+        <Medecine />
+        <TimeLeft />
       </Col>
     </Row>
   );
