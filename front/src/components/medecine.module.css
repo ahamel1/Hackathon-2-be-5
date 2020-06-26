@@ -1,9 +1,9 @@
 .container {
-  background-color: lightblue;
+  background-color: #5bd1ff;
   width: 300px;
   padding: 10px;
   border-radius: 20px;
-  margin: 50px;
+  margin: 100px;
 }
 
 .line {
@@ -16,4 +16,15 @@
 
 .p {
   margin-bottom: 0px;
+  color: white;
+}
+
+.button {
+  color: white;
+  background-color: #6c757d;
+  border-color: white;
+}
+
+.button:hover {
+  background-color: #e18606;
 }
