@@ -8,4 +8,5 @@ module.exports = new Sequelize({
   password: DBPASS,
   database: DBNAME,
   dialect: DBDIALECT,
+  logging: false,
 });

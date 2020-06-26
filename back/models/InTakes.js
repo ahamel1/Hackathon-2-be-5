@@ -10,7 +10,7 @@ const Intakes = sequelizeInstance.define("Intakes", {
     defaultValue: Sequelize.UUIDV4,
   },
   datetime: {
-    type: Sequelize.TIME,
+    type: Sequelize.DATE,
     allowNull: false,
   },
   used: {

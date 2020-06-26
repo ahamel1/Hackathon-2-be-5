@@ -12,10 +12,10 @@ POST http://localhost:5050/intakes HTTP/1.1
 Content-Type: application/json
 
 {
-    "datetime" : "2020-06-26T12:00:34.696Z",
+    "datetime" : "2020-06-26T20:00:34.696Z",
     "TreatmentId": "05a535f8-3ae7-4600-8c4b-a38987766ce4",
-    "DrugId": "e1052827-381b-4eb8-a94c-9dc05033abef",
-    "dosage": 1
+    "DrugId": "fca1a28b-8a15-4327-ab16-9fd884777c4f",
+    "dosage": 1000
 }
 
 ### Put Intakes

@@ -1,6 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const nodemailer = require("nodemailer");
+const cron = require("node-cron");
 
 const sequelize = require("./sequelize");
 require("./associations");
@@ -13,14 +15,10 @@ const treatments = require("./routes/treatments.route");
 const intakes = require("./routes/intakes.route");
 
 const User = require("./models/User");
+const Drugs = require("./models/Drugs");
+const InTakes = require("./models/InTakes");
+const Treatment = require("./models/Treatments");
 const { authToken } = require("./middlewares");
-
-// Bar.belongsToMany(Foo, {
-//     as: "Foo",
-//     through: "rel",
-//     foreignKey: "customNameForBar", // Custom name for column in rel referencing to Bar
-//     sourceKey: "name", // Column in Foo which rel will reference to
-//   });
 
 const app = express();
 const port = 5050;
@@ -56,6 +54,15 @@ app.get("/me", authToken, async (req, res) => {
   } catch (error) {}
 });
 
+let transporter = nodemailer.createTransport({
+  host: "smtp.mailtrap.io",
+  port: 2525,
+  auth: {
+    user: "2ac622624e8532",
+    pass: "918f4d6973015d",
+  },
+});
+
 /**
  * install node-cron
  * every XXmin with node-cron :
@@ -66,9 +73,54 @@ app.get("/me", authToken, async (req, res) => {
  *
  * https://scotch.io/tutorials/nodejs-cron-jobs-by-examples
  */
+cron.schedule("* 15 * * * *", async () => {
+  console.log("---------------------");
+  console.log("Running Cron Job");
+
+  try {
+    const intakes = await InTakes.findAll({
+      include: [
+        {
+          model: Treatment,
+          attributes: ["id"],
+          include: [
+            {
+              model: User,
+              attributes: ["email"],
+            },
+          ],
+        },
+        {
+          model: Drugs,
+          attributes: ["name"],
+        },
+      ],
+    });
+
+    intakes.forEach(async (int) => {
+      const email = int.Treatment.User.email;
+      const drugName = int.Drug.name;
+
+      const date = new Date(int.datetime).getTime();
+      const now = new Date().getTime();
+      if (!int.used && date <= now) {
+        const info = await transporter.sendMail({
+          from: "reminder@doctothon.org",
+          to: email,
+          subject: `REMINDER`,
+          text: `Hi, did you take your ${drugName} ?`,
+          html: ``,
+        });
+        console.log(info);
+      }
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 sequelize
-  .sync({ alter: true })
+  .sync()
   .then(() => {
     return sequelize.authenticate();
   })
